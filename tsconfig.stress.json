@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "rootDir": ".", "noEmit": true },
+  "include": ["scripts/stress/**/*.ts", "tests/stress-metrics.test.ts"]
+}

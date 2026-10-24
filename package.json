@@ -1,0 +1,51 @@
+{
+  "name": "email-scheduler",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.12.0",
+  "engines": { "node": ">=24", "pnpm": ">=11" },
+  "scripts": {
+    "dev": "tsx watch src/api.ts",
+    "dev:worker": "tsx watch src/worker.ts",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "start": "node dist/api.js",
+    "start:worker": "node dist/worker.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx src/db/migrate.ts",
+    "db:studio": "drizzle-kit studio",
+    "search:reindex": "tsx src/reindex.ts",
+    "test": "tsx --test tests/*.test.ts",
+    "test:integration": "tsx --test --test-concurrency=1 tests/integration/*.test.ts",
+    "test:stress": "tsx scripts/stress/run.ts",
+    "typecheck:stress": "tsc --noEmit -p tsconfig.stress.json",
+    "infra:up": "podman compose up -d postgres redis mailpit elasticsearch",
+    "infra:down": "podman compose down"
+  },
+  "dependencies": {
+    "@bull-board/api": "^6.15.0",
+    "@bull-board/express": "^6.15.0",
+    "@elastic/elasticsearch": "^8.17.0",
+    "bullmq": "^5.58.0",
+    "dotenv": "^17.2.0",
+    "drizzle-orm": "1.0.0-rc.5",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.0.0",
+    "helmet": "^8.1.0",
+    "ioredis": "^5.7.0",
+    "nodemailer": "^7.0.0",
+    "pg": "^8.16.0",
+    "pino": "^9.9.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.0",
+    "@types/nodemailer": "^7.0.0",
+    "@types/pg": "^8.15.0",
+    "drizzle-kit": "1.0.0-rc.5",
+    "tsx": "^4.20.0",
+    "typescript": "7.0.2"
+  }
+}
